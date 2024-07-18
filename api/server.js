@@ -51,18 +51,18 @@ app.get('/', (re,res)=>{
 
 app.post('/create',(req,res)=>{
   
-   const sql = " INSERT INTO usuarios ( nombre, apellido,  email, membresia, stado, vencimiento, horas) VALUES (?);"
-   const values = [
-     req.body.nombre,
-     req.body.apellido,
-     req.body.email,
-     req.body.membresia,
-     req.body.stado,
-    req.body.vencimiento,
-     req.body.horas
-   ];
+   const sql = " INSERT INTO usuarios ( nombre, apellido,  email, membresia, stado, vencimiento, horas) VALUES ($1,$2,$3,$4,$5,$6,$7);"
+  
+    const nombre= req.body.nombre;
+     const apellido = req.body.apellido;
+   const email =  req.body.email;
+   const membresia =  req.body.membresia;
+    const stado =  req.body.stado;
+   const vencimiento =  req.body.vencimiento;
+    const horas =  req.body.horas;
+   
    console.log(values)
-   pool.query(sql, [values], (err,data)=>{
+   pool.query(sql, [nombre,apellido,email,membresia,stado,vencimiento,horas], (err,data)=>{
        if(err) return res.json(err);
        console.log(data);
        return res.json("Creando..");
