@@ -51,7 +51,6 @@ app.get('/', (re,res)=>{
 
 app.post('/create',(req,res)=>{
   
-  
    const sql = " INSERT INTO usuarios ( nombre, apellido,  email, membresia, stado, vencimiento, horas) VALUES (?);"
    const values = [
      req.body.nombre,
@@ -99,8 +98,9 @@ app.get('/ass',(re,res)=>{
    return res.json("From backend");
 })
 
+
 app.delete('/', (req,res)=>{
-const sql = "DELETE FROM usuarios WHERE usuarios.id = ?"
+const sql = "DELETE FROM usuarios WHERE usuarios.id = $1"
 
 pool.query(sql,[req.body.id],(err,data)=>{
    if(err) return res.json(err);
@@ -108,6 +108,8 @@ pool.query(sql,[req.body.id],(err,data)=>{
 })
 console.log('eliminando..');
   })
+
+
 
 
 app.put('/serch',(req,res)=>{
