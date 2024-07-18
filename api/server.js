@@ -71,22 +71,19 @@ app.post('/create',(req,res)=>{
         })
 
      app.put('/update', (req,res)=>{
-   const sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, stado = ?, vencimiento = ? , horas = ? WHERE usuarios.id = ?;";
+
+   const sql = "UPDATE usuarios SET nombre = $1, apellido = $2, email = $3,membresia = $4 , stado = $5 , vencimiento = $6 , horas = $7  WHERE usuarios.id = $8 ;";
    const id = req.body.id;
-   const values = [
-       req.body.nombre,
-    req.body.apellido,
-    req.body.email,
-    req.body.stado,
-    req.body.vencimiento,
-   req.body.horas,
-   ]
+   const nombre = req.body.nombre;
+   const apellido = req.body.apellido;
+   const email = req.body.email;
+   const membresia = req.body.membresia;
+   const stado = req.body.stado;
+   const vencimiento = req.body.vencimiento;
+   const horas = req.body.horas;
   
-    console.log(values)
-
-
-
-   pool.query(sql,[...values,id ],(err,data)=>{
+ 
+   pool.query(sql,nombre,apellido,email,membresia,stado,vencimiento,horas,id,(err,data)=>{
        if(err) return res.json(err);
        console.log(data);
        return res.json('Datos modificados!');
