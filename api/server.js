@@ -72,7 +72,7 @@ app.post('/create',(req,res)=>{
 
      app.put('/update', (req,res)=>{
 
-   const sql = "UPDATE usuarios SET nombre = $1, apellido = $2, email = $3,membresia = $4 , stado = $5 , vencimiento = $6 , horas = $7  WHERE usuarios.id = $8 ;";
+   const sql = "UPDATE usuarios SET nombre = $1, apellido = $2, email = $3, membresia = $4 , stado = $5 , vencimiento = $6 , horas = $7  WHERE usuarios.id = $8 ;";
    const id = req.body.id;
    const nombre = req.body.nombre;
    const apellido = req.body.apellido;
@@ -83,7 +83,7 @@ app.post('/create',(req,res)=>{
    const horas = req.body.horas;
   
  
-   pool.query(sql,nombre,apellido,email,membresia,stado,vencimiento,horas,id,(err,data)=>{
+   pool.query(sql,[nombre,apellido,email,membresia,stado,vencimiento,horas,id],(err,data)=>{
        if(err) return res.json(err);
        console.log(data);
        return res.json('Datos modificados!');
