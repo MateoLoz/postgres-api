@@ -61,7 +61,6 @@ app.post('/create',(req,res)=>{
    const vencimiento =  req.body.vencimiento;
     const horas =  req.body.horas;
    
-   console.log(values)
    pool.query(sql, [nombre,apellido,email,membresia,stado,vencimiento,horas], (err,data)=>{
        if(err) return res.json(err);
        console.log(data);
