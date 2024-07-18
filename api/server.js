@@ -52,7 +52,7 @@ app.get('/', (re,res)=>{
 app.post('/create',(req,res)=>{
   
   
-   const sql = " INSERT INTO `usuarios` ( `nombre`, `apellido`,  `email`, `membresia`, `stado`, `vencimiento`, `horas`,`entrada`, `salida`) VALUES (?);"
+   const sql = " INSERT INTO usuarios ( nombre, apellido,  email, membresia, stado, vencimiento, horas) VALUES (?);"
    const values = [
      req.body.nombre,
      req.body.apellido,
@@ -60,9 +60,7 @@ app.post('/create',(req,res)=>{
      req.body.membresia,
      req.body.stado,
     req.body.vencimiento,
-     req.body.horas,
-    req.body.entrada,
-           req.body.salida,
+     req.body.horas
    ];
    console.log(values)
    pool.query(sql, [values], (err,data)=>{
@@ -74,7 +72,7 @@ app.post('/create',(req,res)=>{
         })
 
      app.put('/update', (req,res)=>{
-   const sql = "UPDATE `usuarios` SET `nombre` = ?, `apellido` = ?, `email` = ?, `stado` = ?, `vencimiento` = ? , `horas` = ? WHERE `usuarios`.`id` = ?;";
+   const sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, stado = ?, vencimiento = ? , horas = ? WHERE usuarios.id = ?;";
    const id = req.body.id;
    const values = [
        req.body.nombre,
@@ -102,7 +100,7 @@ app.get('/ass',(re,res)=>{
 })
 
 app.delete('/', (req,res)=>{
-const sql = "DELETE FROM `usuarios` WHERE `usuarios`.`id` = ?"
+const sql = "DELETE FROM usuarios WHERE usuarios.id = ?"
 
 pool.query(sql,[req.body.id],(err,data)=>{
    if(err) return res.json(err);
